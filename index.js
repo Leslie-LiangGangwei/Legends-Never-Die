@@ -162,6 +162,8 @@ $('.time-bar').addEventListener('click', function(e){
         x = Math.min(Math.max(0, x), width)
         progress_ball.style.left = x + 'px'
         var ballProgress = x / width
+        console.log('ballProgress' + ballProgress)
+        // 修改不了 audio.currentTime
         audio.currentTime = audio.duration * ballProgress    
     }
 
