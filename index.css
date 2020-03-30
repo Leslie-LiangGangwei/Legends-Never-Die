@@ -1,0 +1,181 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html , body {
+    height: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: -0.15em;
+    fill: #595a5a;
+    overflow: hidden;
+  }
+
+.cover {
+    height: 100%;  
+    width: 100%;
+    background: url(img/Faker.jpg) center center no-repeat fixed;
+    background-size: cover;
+    position: relative;
+}
+
+.cover::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: inherit;
+    filter: blur(5px);
+    z-index: 2;
+}
+
+.music-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate( -50%, -50%);
+    width: 48%;
+    background: #fff;
+    border-radius: 3px;
+    z-index: 10;
+}
+
+.music-info h1 {
+    color: #595a5a;
+    margin: 16px;
+}
+
+.music-info p {
+    color: #ccc;
+    margin: 16px;
+}
+
+.music-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #f1f3f4;
+    border-radius: 100px;
+    margin: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.music-control .music-switch {
+    margin-left: 16px;
+}
+
+.music-control .music-switch .play, .pause {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+}
+
+.music-control .music-switch:hover{
+    background: #E1E3E5;
+    height: 28px;
+    width: 28px;
+    border-radius: 100%;
+}
+
+.music-control .music-switch .pause:hover{
+    background: #E1E3E5;
+    height: 28px;
+    width: 28px;
+    border-radius: 100%;
+}
+
+.music-control .music-time {
+    margin-left: 16px;
+    font-size: 14px;
+    color: #595a5a;
+    white-space: nowrap;
+}
+
+.music-control .time-bar {
+    position: relative;
+    margin-left: 16px;
+    width: 100%;
+    height: 10px;
+    padding-top: 4px;
+}
+
+.music-control .time-bar .progress-ball {
+    position: absolute;
+    right: -4px;
+    top:  -4px;
+    width: 10px;
+    height: 10px;
+    background: #595a5a;
+    border-radius: 100%;
+}
+
+.music-control .time-bar .progress-now {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    background: #595a5a;
+    height: 2px;
+    width: 100%;
+    border-radius: 50px;
+}
+
+.music-control .time-bar .progress-sum {
+    background: #B7B9BA;
+    height: 2px;
+    width: 100%;
+    border-radius: 50px;
+}
+
+.music-control .music-volume {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 50px;
+    height: 28px;
+    margin-left: 16px;
+    margin-right: 8px;
+}
+
+.music-control .music-volume:hover {
+    background: #E1E3E5;
+}
+
+.music-control .music-volume:hover .volume-bar{
+    display: flex;
+}
+
+.music-control .music-volume svg {
+    display: flex;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+    margin-right : 8px;
+}
+
+.music-control .music-volume .volume-bar {
+    margin-left: 16px;
+    height: 4px;
+    width: 100%;
+}
+
+.music-control .music-volume .volume-bar  .progress-sum {
+    background: #595a5a;
+    height: 4px;
+    width: 56px;
+    border-radius: 50px;
+}
