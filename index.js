@@ -90,12 +90,6 @@ $('.music-control .pause').addEventListener('click', function(){
     $('.play').classList.remove('hidden')
 })
 
-// // 点击 music 进度条
-// $('.time-bar').addEventListener('click', function(e){
-//     // var NowProgress = e.offsetX / parseInt(getComputedStyle($('.time-bar')).width)
-//     // audio.currentTime = audio.duration * NowProgress
-// })
-
 // 拖拽 music 进度条
     var num = 0;
     var timer = null;
@@ -115,6 +109,7 @@ $('.music-control .pause').addEventListener('click', function(){
 
     // 鼠标按下后的函数,e为事件对象
     function down(e) {
+        // 开始计时事件，单位为 50ms
         timer = setInterval(()=>{
             num++;
         },10);
@@ -162,6 +157,7 @@ $('.music-control .pause').addEventListener('click', function(){
 
     // 释放鼠标的函数
     function up(e){
+        // 清除当前计时，如果 > 5 (50ms) 就拖拽
         clearInterval(timer);
         if (num > 5) {
             dragging = false;
@@ -173,6 +169,7 @@ $('.music-control .pause').addEventListener('click', function(){
             var ballProgress = x / width
             audio.currentTime = audio.duration * ballProgress
         }else {
+            // 否则进行点击事件
             dragging = false;
             var NowProgress = e.offsetX / parseInt(getComputedStyle($('.time-bar')).width)
             audio.currentTime = audio.duration * NowProgress
