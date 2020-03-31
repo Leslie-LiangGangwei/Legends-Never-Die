@@ -56,7 +56,7 @@ audio.ontimeupdate = function(){
     $('.progress-now').style.width = (this.currentTime/this.duration) * 100 + '%';
 
     // // progress-ball 跟随音乐播放移动
-    $('.progress-ball').style.left = (this.currentTime/this.duration) * ($('.time-bar').clientWidth)
+    $('.progress-ball').style.left = (this.currentTime/this.duration) * ($('.time-bar').clientWidth) + 'px'
 
     // 获取 music 总时长
     $('.time-sum').innerText =  Math.floor((this.duration)/60) + ':' + Math.floor((this.duration)%60);
@@ -105,7 +105,7 @@ $('.music-control .pause').addEventListener('click', function(){
     document.addEventListener('mousemove', move)
 
     // 释放鼠标的动作
-    document.addEventListener('mouseup', up)
+    $('.time-bar').addEventListener('mouseup', up)
 
     // 鼠标按下后的函数,e为事件对象
     function down(e) {
