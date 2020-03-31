@@ -55,8 +55,8 @@ audio.ontimeupdate = function(){
     // music 进度条变化
     $('.progress-now').style.width = (this.currentTime/this.duration) * 100 + '%';
 
-    // progress-ball 跟随音乐播放移动
-    $('.progress-now').style.width = (this.currentTime/this.duration) * 100 + '%'
+    // // progress-ball 跟随音乐播放移动
+    $('.progress-ball').style.left = (this.currentTime/this.duration) * ($('.time-bar').clientWidth)
 
     // 获取 music 总时长
     $('.time-sum').innerText =  Math.floor((this.duration)/60) + ':' + Math.floor((this.duration)%60);
@@ -90,15 +90,19 @@ $('.music-control .pause').addEventListener('click', function(){
     $('.play').classList.remove('hidden')
 })
 
-// 点击 music 进度条
-$('.time-bar').addEventListener('click', function(e){
-    var NowProgress = e.offsetX / parseInt(getComputedStyle($('.time-bar')).width)
-    audio.currentTime = audio.duration * NowProgress
-})
+// // 点击 music 进度条
+// $('.time-bar').addEventListener('click', function(e){
+//     // var NowProgress = e.offsetX / parseInt(getComputedStyle($('.time-bar')).width)
+//     // audio.currentTime = audio.duration * NowProgress
+// })
 
 // 拖拽 music 进度条
+    var num = 0;
+    var timer = null;
     var dragging = false
-    var progress_ball = $('.progress-ball')
+    var progress_ball = $('.progress-ball');
+    var offsetX = null;
+    var width = null;
 
     // 鼠标按下的动作
     progress_ball.addEventListener('mousedown', down)
@@ -111,8 +115,11 @@ $('.time-bar').addEventListener('click', function(e){
 
     // 鼠标按下后的函数,e为事件对象
     function down(e) {
+        timer = setInterval(()=>{
+            num++;
+        },10);
         dragging = true
-
+        downOffsetX = e.offsetX;
         // 获取元素所在的坐标
         ballX = progress_ball.offsetLeft
         ballY = progress_ball.offsetTop
@@ -155,16 +162,22 @@ $('.time-bar').addEventListener('click', function(e){
 
     // 释放鼠标的函数
     function up(e){
-        dragging = false;
-        // 获取当前元素位置
-        var x = getMouseXY(e).x - offsetX
-        var width = $('.time-bar').clientWidth - progress_ball.offsetWidth
-        x = Math.min(Math.max(0, x), width)
-        progress_ball.style.left = x + 'px'
-        var ballProgress = x / width
-        console.log('ballProgress' + ballProgress)
-        // 修改不了 audio.currentTime
-        audio.currentTime = audio.duration * ballProgress    
+        clearInterval(timer);
+        if (num > 5) {
+            dragging = false;
+            // 获取当前元素位置
+            var x = getMouseXY(e).x - offsetX
+            var width = $('.time-bar').clientWidth - progress_ball.offsetWidth
+            x = Math.min(Math.max(0, x), width)
+            progress_ball.style.left = x + 'px'
+            var ballProgress = x / width
+            audio.currentTime = audio.duration * ballProgress
+        }else {
+            dragging = false;
+            var NowProgress = e.offsetX / parseInt(getComputedStyle($('.time-bar')).width)
+            audio.currentTime = audio.duration * NowProgress
+        }
+        
     }
 
     // 函数用于获取鼠标的位置
