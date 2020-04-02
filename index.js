@@ -129,9 +129,9 @@ $('.music-control .pause').addEventListener('click', function(){
 // 拖拽 music 进度条
     var num = 0;
     var timer = null;
-    var dragging = false
+    var dragging = false;
     var progress_ball = $('.progress-ball');
-    var offsetX = null;
+    var offsetX,offsetY;
     var width = null;
 
     // 鼠标按下的动作
@@ -233,12 +233,43 @@ $('.music-control .pause').addEventListener('click', function(){
 
 // music-volume 控制
 // icon-volume
-if( audio.volume !== 0){
-    $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 1)"
-}else{
-    $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 0.4)"
-}
+// if( audio.volume !== 0){
+//     $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 1)"
+// }else{
+//     $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 0.4)"
+// }
 // 当前 volume 控制器
 audio.volume = 0.5
 $('.music-volume .progress-now').style.width = $('.music-volume .progress-sum').clientWidth * audio.volume + 'px'
 $('.music-volume .volume-ball').style.left = $('.music-volume .progress-sum').clientWidth * audio.volume  + 'px' 
+
+// 拖拽 volume-ball
+var offX,offY;
+var dragging2 = false;
+$('.volume-ball').addEventListener('mousedown', function(e){
+    dragging2 = true;
+    mouseX = parseInt(getMouseXY(e).x)
+    mouseY = parseInt(getMouseXY(e).y)
+
+    ballX = $('.volume-ball').offsetLeft
+    ballY = $('.volume-ball').offsetTop
+
+    offX = mouseX - ballX;
+    offY = mouseY - ballY;
+})
+
+document.addEventListener('mousemove', function(e){
+    if(dragging2){
+        var x = parseInt(getMouseXY(e).x) - offX;
+        var y = parseInt(getMouseXY(e).y) - offY;
+
+        $('.volume-ball').style.left = x + 'px'
+        $('.volume-ball').style.top = y + 'px'
+    }
+})
+
+$('.volume-bar').addEventListener('mouseup', function(e){
+    dragging2 = false;
+})
+    
+// 获取数据
