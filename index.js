@@ -19,21 +19,57 @@ function getMusicList(callback){
 
 // 封装 Music 播放
 function MusicPlay(MusicObj){
-    console.log('begin play', MusicObj.title)
+    console.log(MusicObj.title)
     audio.src = MusicObj.src
     $('.music-name').innerText = MusicObj.title
     $('.music-author').innerText = MusicObj.author
 }
 
 // music 自动播放
-var currentIndex = 0
-var audio = new Audio()
-audio.autoplay = true
-audio.loop = true
+var currentIndex = 0;
+var audio = new Audio();
+var MusicList = [];
+audio.autoplay = true;
+audio.loop = true;
 
+// music 播放
 getMusicList(function(List){
     console.log(List)
+    MusicList = List;
     MusicPlay(List[currentIndex])
+})
+
+// music last & next
+// last
+$('.music-last').addEventListener('click', function(){
+    var num = --currentIndex;
+    target = num % getMusicList.length
+    MusicPlay(MusicList[target])
+})
+// next
+$('.music-next').addEventListener('click', function(){
+    var num = ++currentIndex;
+    target = num % getMusicList.length
+    MusicPlay(MusicList[target])
+})
+
+// music 循环播放设置
+if(audio.loop === true){
+    $('.music-loop svg').style.fill = "rgba(255, 255, 255, 1)";
+}else{
+    $('.music-loop svg').style.fill = "rgba(255, 255, 255, 0.4)";
+}
+
+$('.music-loop').addEventListener('click', function(){
+    if(audio.loop === false){
+        audio.loop = true;
+        $('.music-loop svg').style.fill = "rgba(255, 255, 255, 1)";
+        console.log('audio.loop = true;')
+    }else{
+        audio.loop = false;
+        $('.music-loop svg').style.fill = "rgba(255, 255, 255, 0.4)";
+        console.log('audio.loop = false;')
+    }
 })
 
 //处理当 time 仅为有一位时，适当作出补充。例如：04
@@ -194,3 +230,15 @@ $('.music-control .pause').addEventListener('click', function(){
             y: y
         }
     }
+
+// music-volume 控制
+// icon-volume
+if( audio.volume !== 0){
+    $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 1)"
+}else{
+    $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 0.4)"
+}
+// 当前 volume 控制器
+audio.volume = 0.5
+$('.music-volume .progress-now').style.width = $('.music-volume .progress-sum').clientWidth * audio.volume + 'px'
+$('.music-volume .volume-ball').style.left = $('.music-volume .progress-sum').clientWidth * audio.volume  + 'px' 

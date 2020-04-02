@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    line-height: 1.5;
 }
 
 html , body {
@@ -13,17 +14,18 @@ html , body {
 }
 
 .icon {
-    width: 14px;
-    height: 14px;
+    width: 22px;
+    height: 22px;
     vertical-align: -0.15em;
-    fill: #595a5a;
+    fill:rgba(255, 255, 255, 0.4);
     overflow: hidden;
-  }
+}
 
 .cover {
     height: 100%;  
     width: 100%;
-    background: url(img/Faker.jpg) center center no-repeat fixed;
+    /* background: url(img/Faker.jpg) center center no-repeat fixed; */
+    background: black;
     background-size: cover;
     position: relative;
 }
@@ -41,73 +43,122 @@ html , body {
 }
 
 .music-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform:translate( -50%, -50%);
-    width: 48%;
-    background: #fff;
-    border-radius: 3px;
-    z-index: 10;
-}
-
-.music-info h1 {
-    color: #595a5a;
-    margin: 16px;
-}
-
-.music-info p {
-    color: #ccc;
-    margin: 16px;
+    margin: 0 7.638889%;
+    position: relative;
+    z-index: 3;
 }
 
 .music-control {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background: #f1f3f4;
-    border-radius: 100px;
-    margin: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 11%;
+    z-index: 10;
+    margin-top: 20px;
+    margin-bottom: 80px;
 }
 
+/* icon */
 .music-control .music-switch {
-    margin-left: 16px;
+    margin-left: 32px;
 }
 
 .music-control .music-switch .play, .pause {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 28px;
-    width: 28px;
 }
 
-.music-control .music-switch:hover{
-    background: #E1E3E5;
-    height: 28px;
-    width: 28px;
-    border-radius: 100%;
+.music-control .music-switch svg {
+    height: 32px;
+    width: 32px;
 }
 
-.music-control .music-switch .pause:hover{
-    background: #E1E3E5;
-    height: 28px;
-    width: 28px;
-    border-radius: 100%;
+.music-control .music-switch svg:hover {
+    fill: white;
 }
 
-.music-control .music-time {
-    margin-left: 16px;
-    font-size: 14px;
-    color: #595a5a;
-    white-space: nowrap;
+.music-control  .music-last {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-control .music-last svg:hover {
+    fill: white;
+}
+
+.music-control  .music-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-control .music-next {
+    margin-left: 32px;
+}
+
+.music-control .music-next svg:hover {
+    fill: white;
+}
+
+.music-control .music-next {
+    margin-left: 32px;
+}
+
+.music-control .music-loop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-control .music-loop svg {
+    width: 26px;
+    height: 26px;
+}
+
+.music-control .music-loop svg:hover {
+    fill: white;
+}
+
+.music-control .icon-volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-control .icon-volume svg {
+    width: 26px;
+    height: 26px;
+}
+
+/* 音乐播放控制器 */
+.music-control .music-progress {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.music-progress .music-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.music-info span {
+    color: rgba(255, 255, 255, 0.8) ;
+    margin-right: 4px;
 }
 
 .music-control .time-bar {
     position: relative;
-    margin-left: 16px;
     width: 100%;
     height: 10px;
     padding-top: 4px;
@@ -119,7 +170,7 @@ html , body {
     top:  -4px;
     width: 10px;
     height: 10px;
-    background: #595a5a;
+    background: white;
     border-radius: 100%;
 }
 
@@ -127,14 +178,14 @@ html , body {
     position: absolute;
     top: 4px;
     left: 0;
-    background: #595a5a;
+    background: rgba(255, 255, 255, 1);
     height: 2px;
     width: 100%;
     border-radius: 50px;
 }
 
 .music-control .time-bar .progress-sum {
-    background: #B7B9BA;
+    background: rgba(255, 255, 255, 0.4);;
     height: 2px;
     width: 100%;
     border-radius: 50px;
@@ -146,36 +197,43 @@ html , body {
     align-items: center;
     border-radius: 50px;
     height: 28px;
-    margin-left: 16px;
-    margin-right: 8px;
-}
-
-.music-control .music-volume:hover {
-    background: #E1E3E5;
+    margin-left: 32px;
 }
 
 .music-control .music-volume:hover .volume-bar{
     display: flex;
 }
 
-.music-control .music-volume svg {
-    display: flex;
-    align-items: center;
-    width: 18px;
-    height: 18px;
-    margin-left: 8px;
-    margin-right : 8px;
-}
-
 .music-control .music-volume .volume-bar {
+    position: relative;
     margin-left: 16px;
-    height: 4px;
+    height: 2px;
     width: 100%;
 }
 
-.music-control .music-volume .volume-bar  .progress-sum {
-    background: #595a5a;
-    height: 4px;
-    width: 56px;
+.music-control .music-volume .volume-bar .progress-now {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 1);
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+}
+
+.music-control .music-volume .volume-bar .progress-now .volume-ball {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    background: rgba(255, 255, 255, 1);
+    height: 10px;
+    width: 10px;
+    border-radius: 50px;
+}
+
+.music-control .music-volume .volume-bar .progress-sum {
+    background: rgba(255, 255, 255, 0.4);
+    height: 2px;
+    width: 80px;
     border-radius: 50px;
 }

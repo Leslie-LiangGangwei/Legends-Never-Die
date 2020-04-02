@@ -10,49 +10,78 @@
 <body>
     <div class="cover"></div>
         <div class="music-box">
-            <div class="music-info">
-                <h1 class="music-name">My song</h1>
-                <p class="music-author">Leslie</p>
-            </div>
             <div class="music-control">
+                <div class="music-last">
+                    <svg class="icon" aria-hidden="true">
+                        <a href="javascript:;">
+                        <use xlink:href="#icon-music-last"></use>
+                        </a>
+                    </svg>
+                </div>
                 <div class="music-switch">
                     <div class="pause">
                         <svg class="icon" aria-hidden="true">
+                            <a href="javascript:;">
                             <use xlink:href="#icon-music-pause"></use>
+                            </a>
                         </svg>
                     </div>
                     <div class="play hidden">
                         <svg class="icon" aria-hidden="true">
+                            <a href="javascript:;">
                             <use xlink:href="#icon-music-play"></use>
+                            </a>
                         </svg>
                     </div>
                 </div>
-                <div class="music-time">
-                    <span class='time-start'>0:00</span>
-                    <span>/</span>
-                    <span class="time-sum">4:33</span>
+                <div class="music-next">
+                    <svg class="icon" aria-hidden="true">
+                        <a href="javascript:;">
+                        <use xlink:href="#icon-music-next"></use>
+                        </a>
+                    </svg>
                 </div>
-                <div class="time-bar">
-                    <div class="progress-now">
-                        <div class="progress-ball"></div>
+                <div class="music-progress">
+                    <div class="music-info">
+                        <div class="music-word">
+                            <span class="music-name">My song</span>
+                            <span>/</span>
+                            <span class="music-author">Leslie</span>
+                        </div>
+                        <div class="music-time">
+                            <span class='time-start'>0:00</span>
+                            <span>/</span>
+                            <span class="time-sum">4:33</span>
+                        </div>
                     </div>
-                    <div class="progress-sum"></div>
+                    <div class="time-bar">
+                            <div class="progress-now">
+                                <div class="progress-ball"></div>
+                            </div>
+                            <div class="progress-sum"></div>
+                        
+                    </div>
+                </div>
+                <div class="music-loop">
+                    <svg class="icon" aria-hidden="true">
+                        <a href="javascript:;">
+                        <use xlink:href="#icon-music-loop"></use>
+                        </a>
+                    </svg>
                 </div>
                 <div class="music-volume">
-                    <div class="volume-bar">
-                        <div class="progress-now"></div>
-                        <div class="progress-sum"></div>
-                    </div>
                     <div class="icon-volume">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-music-volume"></use>
                         </svg>
                     </div>
+                    <div class="volume-bar">
+                        <div class="progress-now">
+                            <div class="volume-ball"></div>
+                        </div>
+                        <div class="progress-sum"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="music-word">
-                <p class="processing"></p>
-                <p class="process"></p>
             </div>
         </div>
         <script src="index.js"></script>
