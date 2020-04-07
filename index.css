@@ -5,6 +5,7 @@
     line-height: 1.5;
 }
 
+
 html , body {
     height: 100%;
 }
@@ -45,7 +46,7 @@ html , body {
 .music-box {
     margin: 0 7.638889%;
     position: relative;
-    z-index: 3;
+    z-index: 4;
 }
 
 .music-control {
@@ -58,7 +59,7 @@ html , body {
     left: 0;
     width: 100%;
     height: 11%;
-    z-index: 10;
+    z-index: 20;
     margin-top: 20px;
     margin-bottom: 80px;
 }
@@ -206,17 +207,19 @@ html , body {
 
 .music-control .music-volume .volume-bar {
     position: relative;
+    display: flex;
+    align-items: center;
     margin-left: 16px;
-    height: 2px;
+    height: 10px;
     width: 100%;
 }
 
 .music-control .music-volume .volume-bar .progress-now {
     position: absolute;
-    top: 0;
+    top: -4;
     left: 0;
     background: rgba(255, 255, 255, 1);
-    height: 100%;
+    height: 2px;
     width: 100%;
     border-radius: 50px;
 }
@@ -236,4 +239,26 @@ html , body {
     height: 2px;
     width: 80px;
     border-radius: 50px;
+}
+
+.cover .lyric-box {
+    position: absolute;
+    top: 18%;
+    bottom: 18%;
+    width: 100%;
+    min-height: 328px;
+    z-index: 3;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(255,255,255,.6) 15%,rgba(255,255,255,1) 25%,rgba(255,255,255,1) 75%,rgba(255,255,255,.6) 85%,rgba(255,255,255,0) 100%);
+}
+
+.cover .lyric-box p{
+    text-align: center;
+    font-size: 22px;
+    line-height: 58px;
+    color: #fff;
+}
+
+.played{
+    color:pink !important;
 }

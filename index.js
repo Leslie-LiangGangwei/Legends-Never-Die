@@ -20,9 +20,32 @@ function getMusicList(callback){
 // 封装 Music 播放
 function MusicPlay(MusicObj){
     console.log(MusicObj.title)
+    console.log(MusicObj)
     audio.src = MusicObj.src
     $('.music-name').innerText = MusicObj.title
     $('.music-author').innerText = MusicObj.author
+
+    // 解析歌词
+    var str = MusicObj.lrc;
+    var arr = str.split('[');
+    var html = '';
+    for(var i = 0; i < arr.length; i++) {
+        var arr2 = arr[i].split(']');
+        // 歌词
+        var text = arr2[1];
+        // 时间
+        var time = arr2[0].split('.');
+        var ms = time[1]; 
+        var time2 = time[0].split(':')
+        var s = time2[1];
+        var m = time2[0];
+        var num_s = (parseInt(m)*60)+parseInt(s);
+        // 拼接歌词
+        if(text) {
+            html += '<p id="lyric' + num_s +'">' + text + '</p>';
+        }
+    }
+    $('.lyric-box').innerHTML = html
 }
 
 // music 自动播放
@@ -32,25 +55,30 @@ var MusicList = [];
 audio.autoplay = true;
 audio.loop = true;
 
+audio.addEventListener('ended', function(){
+    if (audio.loop === false) {
+        currentIndex = (++currentIndex) % MusicList.length
+            MusicPlay(MusicList[currentIndex])
+    }
+})
+
 // music 播放
 getMusicList(function(List){
     console.log(List)
     MusicList = List;
-    MusicPlay(List[currentIndex])
+    MusicPlay(MusicList[currentIndex])
 })
 
 // music last & next
 // last
 $('.music-last').addEventListener('click', function(){
-    var num = --currentIndex;
-    target = num % getMusicList.length
-    MusicPlay(MusicList[target])
+    currentIndex = (--currentIndex) % MusicList.length
+    MusicPlay(MusicList[currentIndex])
 })
 // next
 $('.music-next').addEventListener('click', function(){
-    var num = ++currentIndex;
-    target = num % getMusicList.length
-    MusicPlay(MusicList[target])
+    currentIndex = (++currentIndex) % MusicList.length
+    MusicPlay(MusicList[currentIndex])
 })
 
 // music 循环播放设置
@@ -100,6 +128,11 @@ audio.ontimeupdate = function(){
     // 获取当前 music 时长
     $('.time-start').innerText = Math.floor((this.currentTime/60)) + ':' + SingleSecond(Math.floor((this.currentTime%60))+'')
 
+    // 根据*当前秒数*获取到当前歌词进度
+    var num = parseInt(audio.currentTime)
+    var Now_lrc = $('#lyric'+num)
+    lyricOn(Now_lrc)
+
     console.log('update')
     //关闭数据更新
     _this.shouldUpdate = false
@@ -108,6 +141,33 @@ audio.ontimeupdate = function(){
       _this.shouldUpdate = true
     }, 1000)
   }
+}
+
+// 歌词样式调整
+function lyricOn(obj) {
+    // 直接将进行中的歌词赋值
+    if(obj) {
+        obj.classList.add('played');
+    }
+    
+    // 获取所有歌词节点
+    var lyric_p = $('.lyric-box').getElementsByTagName('p');
+    // 循环全部的节点而且为节点index赋值，注意不给index赋值的状况下index为undefined;
+    // i = 0 - 33, 34位
+    var index;
+    // .index 方法为，返回数组索引。
+    for(var i = 0; i < lyric_p.length; i++){
+        lyric_p[i].index = i;
+    }
+    
+     //当前节点不为空的状况下，就改变样式
+     if(obj) {
+        // 通过传输的 obj.index 对比 j, 将以前已经唱过的歌词取消赋值样式。
+        // 当 obj.index = 1, for 循环才开始跑。
+        for(var j = 0; j < obj.index; j++) {
+            lyric_p[j].classList.remove('played')
+        }
+    }    
 }
 
 // 播放器交互设置
@@ -150,7 +210,6 @@ $('.music-control .pause').addEventListener('click', function(){
             num++;
         },10);
         dragging = true
-        downOffsetX = e.offsetX;
         // 获取元素所在的坐标
         ballX = progress_ball.offsetLeft
         ballY = progress_ball.offsetTop
@@ -200,9 +259,9 @@ $('.music-control .pause').addEventListener('click', function(){
             // 获取当前元素位置
             var x = getMouseXY(e).x - offsetX
             var width = $('.time-bar').clientWidth - progress_ball.offsetWidth
-            x = Math.min(Math.max(0, x), width)
-            progress_ball.style.left = x + 'px'
             var ballProgress = x / width
+
+            progress_ball.style.left = x + 'px'
             audio.currentTime = audio.duration * ballProgress
         }else {
             // 否则进行点击事件
@@ -210,7 +269,6 @@ $('.music-control .pause').addEventListener('click', function(){
             var NowProgress = e.offsetX / parseInt(getComputedStyle($('.time-bar')).width)
             audio.currentTime = audio.duration * NowProgress
         }
-        
     }
 
     // 函数用于获取鼠标的位置
@@ -244,9 +302,14 @@ $('.music-volume .progress-now').style.width = $('.music-volume .progress-sum').
 $('.music-volume .volume-ball').style.left = $('.music-volume .progress-sum').clientWidth * audio.volume  + 'px' 
 
 // 拖拽 volume-ball
-var offX,offY;
+var offX,offY,TimeVolume;
+var NumVolume = 0;
 var dragging2 = false;
 $('.volume-ball').addEventListener('mousedown', function(e){
+    TimeVolume = setInterval(()=>{
+        NumVolume++;
+    },10);
+
     dragging2 = true;
     mouseX = parseInt(getMouseXY(e).x)
     mouseY = parseInt(getMouseXY(e).y)
@@ -263,13 +326,33 @@ document.addEventListener('mousemove', function(e){
         var x = parseInt(getMouseXY(e).x) - offX;
         var y = parseInt(getMouseXY(e).y) - offY;
 
+        var width = $('.volume-bar').clientWidth - $('.volume-ball').offsetWidth;
+        var height = $('.volume-bar').clientHeight - $('.volume-ball').offsetHeight - 4;
+
+        x = Math.min(Math.max(0, x), width);
+        y = Math.min(Math.max(0, y), height);
+
         $('.volume-ball').style.left = x + 'px'
         $('.volume-ball').style.top = y + 'px'
+        $('.music-volume .progress-now').style.width = x + 'px'
+        $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 1)"
     }
 })
 
 $('.volume-bar').addEventListener('mouseup', function(e){
+    $('.icon-volume svg').style.fill = "rgba(255, 255, 255, 0.4)"
     dragging2 = false;
+
+    clearInterval(TimeVolume);
+    if (NumVolume > 5) {
+        var x = parseInt(getMouseXY(e).x) - offX;
+        $('.music-volume .progress-now').style.width = x + 'px';
+        $('.music-volume .volume-ball').style.left = x + 'px';
+        audio.volume = x / $('.music-volume .progress-sum').offsetWidth;
+    }else{
+        dragging2 = false;
+        $('.music-volume .progress-now').style.width = e.offsetX + 'px';
+        $('.music-volume .volume-ball').style.left = e.offsetX + 'px';
+        audio.volume = e.offsetX / $('.music-volume .progress-sum').offsetWidth;
+    }
 })
-    
-// 获取数据

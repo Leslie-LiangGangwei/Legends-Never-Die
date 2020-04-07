@@ -1,7 +1,16 @@
-[{
-    "src":"music/Mp3/legends never die.mp3",
-    "title":"Legends never die",
-    "author":"Against The Current",
-    "img":"img/Faker.png"
+[
+    {
+        "src":"music/Mp3/legends never die.mp3",
+        "title":"Legends never die",
+        "author":"Against The Current",
+        "img":"img/Faker.png",
+        "lrc":"[00:00.07]Against The Current - Legends Never Die[00:12.48]Legends never die when the world is calling you[00:19.91]Can you hear them screaming out your name[00:26.25]Legends never die they become a part of you[00:33.66]Every time you bleed for reaching greatness[00:40.10]Relentless you survive[00:44.25]They never lose hope when everything's cold and the fighting's near[00:51.20]It's deep in their bones they'll run into smoke when the fire is fierce[00:57.49]Oh pick yourself up 'cause[01:00.61]Legends never die when the world is calling you[01:08.01]Can you hear them screaming out your name[01:14.39]Legends never die they become a part of you[01:21.92]Every time you bleed for reaching greatness[01:28.15]Legends never die[01:31.70]They're written down in eternity[01:35.14]But you'll never see the price it costs[01:40.66]The scars collected all their lives[01:45.93]When everything's lost they pick up their hearts and avenge defeat[01:52.81]Before it all starts they suffer through harm just to touch a dream[01:59.29]Oh pick yourself up 'cause[02:02.29]Legends never die when the world is calling you[02:09.69]Can you hear them screaming out your name[02:15.90]Legends never die they become a part of you[02:23.75]Every time you bleed for reaching greatness[02:29.88]Legends never die[02:35.99]When the world is calling out your name[02:43.44]Begging you to fight[02:51.54]Pick yourself up once more[02:54.97]Pick yourself up 'cause[02:57.05]Legends never die when the world is calling you[03:04.65]Can you hear them screaming out your name[03:10.82]Legends never die they become a part of you[03:18.59]Every time you bleed for reaching greatness[03:24.77]Legends never die"
+    },
+    {
+        "src":"music/Mp3/有点甜.mp3",
+        "title":"有点甜",
+        "author":"汪苏泷 & 花澤香菜",
+        "img":"img/Faker.png",
+        "lrc":"Legends Never Die.lrc" 
     }
-]
+]   
