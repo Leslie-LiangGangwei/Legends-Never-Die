@@ -160,14 +160,14 @@ function lyricOn(obj) {
         lyric_p[i].index = i;
     }
     
-     //当前节点不为空的状况下，就改变样式
-     if(obj) {
+    //当前节点不为空的状况下，就改变样式
+    if(obj) {
         // 通过传输的 obj.index 对比 j, 将以前已经唱过的歌词取消赋值样式。
         // 当 obj.index = 1, for 循环才开始跑。
         for(var j = 0; j < obj.index; j++) {
             lyric_p[j].classList.remove('played')
         }
-    }    
+    }   
 }
 
 // 播放器交互设置
