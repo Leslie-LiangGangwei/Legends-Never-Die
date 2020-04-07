@@ -161,7 +161,7 @@ function lyricOn(obj) {
         obj.classList.add('played');
     }
     
-    $('.lyric-p').style.top =  ($('.lyric-box').clientHeight / 2) - obj.offsetTop - 80 + 'px';
+    $('.lyric-p').style.top =  ($('.lyric-box').clientHeight / 2) - obj.offsetTop - 30 + 'px';
 
     // 获取所有歌词节点
     var lyric_p = $('.lyric-p').getElementsByTagName('p');
