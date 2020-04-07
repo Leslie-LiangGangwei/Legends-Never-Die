@@ -161,7 +161,9 @@ function lyricOn(obj) {
         obj.classList.add('played');
     }
     
-    $('.lyric-p').style.top =  ($('.lyric-box').clientHeight / 2) - obj.offsetTop - 30 + 'px';
+    // 歌词滚动, 当 obj 获取不到时，obj.offsetTop 会报错，别怕。不影响程序运用。
+    $('.lyric-p').style.top =  ($('.lyric-box').clientHeight / 2) - (obj.offsetTop) - 30 + 'px';
+    console.log(obj.offsetTop)
 
     // 获取所有歌词节点
     var lyric_p = $('.lyric-p').getElementsByTagName('p');
