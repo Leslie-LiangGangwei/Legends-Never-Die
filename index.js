@@ -3,6 +3,11 @@ function $(selector){
     return document.querySelector(selector)
 }
 
+function $$(selector){
+    return document.querySelectorAll(selector)
+}
+
+
 // 封装获取 getMusicList
 function getMusicList(callback){
     var xhr = new XMLHttpRequest()
@@ -45,7 +50,7 @@ function MusicPlay(MusicObj){
             html += '<p id="lyric' + num_s +'">' + text + '</p>';
         }
     }
-    $('.lyric-box').innerHTML = html
+    $('.lyric-p').innerHTML = html
 }
 
 // music 自动播放
@@ -145,13 +150,21 @@ audio.ontimeupdate = function(){
 
 // 歌词样式调整
 function lyricOn(obj) {
-    // 直接将进行中的歌词赋值
+    // 当前节点不为空的状况下,将进行中的歌词赋值
     if(obj) {
+        // 移除之前所有的 played 样式
+        var Now_played = $$('.played');
+        Now_played.forEach(function(elem){
+            elem.classList.remove('played');
+        })
+        // 给当前播放歌词赋值
         obj.classList.add('played');
     }
     
+    $('.lyric-p').style.top =  ($('.lyric-box').clientHeight / 2) - obj.offsetTop - 80 + 'px';
+
     // 获取所有歌词节点
-    var lyric_p = $('.lyric-box').getElementsByTagName('p');
+    var lyric_p = $('.lyric-p').getElementsByTagName('p');
     // 循环全部的节点而且为节点index赋值，注意不给index赋值的状况下index为undefined;
     // i = 0 - 33, 34位
     var index;
@@ -160,7 +173,6 @@ function lyricOn(obj) {
         lyric_p[i].index = i;
     }
     
-    //当前节点不为空的状况下，就改变样式
     if(obj) {
         // 通过传输的 obj.index 对比 j, 将以前已经唱过的歌词取消赋值样式。
         // 当 obj.index = 1, for 循环才开始跑。

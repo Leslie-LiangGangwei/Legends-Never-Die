@@ -243,13 +243,19 @@ html , body {
 
 .cover .lyric-box {
     position: absolute;
-    top: 18%;
-    bottom: 18%;
+    top: 0px;
+    bottom: 0px;
+    margin-top: 80px;
+    margin-bottom: 160px;
     width: 100%;
     min-height: 328px;
     z-index: 3;
     overflow: hidden;
     mask-image: linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(255,255,255,.6) 15%,rgba(255,255,255,1) 25%,rgba(255,255,255,1) 75%,rgba(255,255,255,.6) 85%,rgba(255,255,255,0) 100%);
+}
+
+.cover .lyric-box .lyric-p  {
+    position: relative;
 }
 
 .cover .lyric-box p{
