@@ -30,7 +30,6 @@ function MusicPlay(MusicObj){
     $('.music-name').innerText = MusicObj.title
     $('.music-author').innerText = MusicObj.author
     $('.cover').style = ("background: url(") + MusicObj.img + (") center center no-repeat")
-    // $('.cover').style = "background-size: cover"
 
     // 解析歌词
     var str = MusicObj.lrc;
