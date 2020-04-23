@@ -25,7 +25,6 @@ html , body {
 .cover {
     height: 100%;  
     width: 100%;
-    /* background: url('img/Faker.png') center center fixed no-repeat; */
     background: black;
     background-size: cover !important;
     position: relative;
