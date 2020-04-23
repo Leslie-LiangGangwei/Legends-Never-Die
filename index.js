@@ -29,6 +29,8 @@ function MusicPlay(MusicObj){
     audio.src = MusicObj.src
     $('.music-name').innerText = MusicObj.title
     $('.music-author').innerText = MusicObj.author
+    $('.cover').style = ("background: url(") + MusicObj.img + (") center center no-repeat")
+    // $('.cover').style = "background-size: cover"
 
     // 解析歌词
     var str = MusicObj.lrc;
@@ -161,7 +163,9 @@ function lyricOn(obj) {
         obj.classList.add('played');
     }
     
-    $('.lyric-p').style.top =  ($('.lyric-box').clientHeight / 2) - obj.offsetTop - 80 + 'px';
+    // 歌词滚动, 当 obj 获取不到时，obj.offsetTop 会报错，别怕。不影响程序运用。
+    $('.lyric-p').style.top =  ($('.lyric-box').clientHeight / 2) - (obj.offsetTop) - 30 + 'px';
+    console.log(obj.offsetTop)
 
     // 获取所有歌词节点
     var lyric_p = $('.lyric-p').getElementsByTagName('p');

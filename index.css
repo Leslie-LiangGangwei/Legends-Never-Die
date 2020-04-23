@@ -25,9 +25,9 @@ html , body {
 .cover {
     height: 100%;  
     width: 100%;
-    /* background: url(img/Faker.jpg) center center no-repeat fixed; */
+    /* background: url('img/Faker.png') center center fixed no-repeat; */
     background: black;
-    background-size: cover;
+    background-size: cover !important;
     position: relative;
 }
 
@@ -39,7 +39,7 @@ html , body {
     left: 0;
     top: 0;
     background: inherit;
-    filter: blur(5px);
+    filter: blur(2px);
     z-index: 2;
 }
 
@@ -251,7 +251,7 @@ html , body {
     min-height: 328px;
     z-index: 3;
     overflow: hidden;
-    mask-image: linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(255,255,255,.6) 15%,rgba(255,255,255,1) 25%,rgba(255,255,255,1) 75%,rgba(255,255,255,.6) 85%,rgba(255,255,255,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(255,255,255,.6) 15%,rgba(255,255,255,1) 25%,rgba(255,255,255,1) 75%,rgba(255,255,255,.6) 85%,rgba(255,255,255,0) 100%);
 }
 
 .cover .lyric-box .lyric-p  {
@@ -266,5 +266,5 @@ html , body {
 }
 
 .played{
-    color:pink !important;
+    color:#C7363B !important;
 }
